@@ -97,7 +97,7 @@
   .runmark{position:absolute;right:0;top:4px;width:96px;height:96px}
   @media(max-width:640px){.runmark{width:64px;height:64px}}
 
-/* ───────── realistic runner animation ───────── */
+/* ───────── smooth realistic runner ───────── */
 
 #lg-runner,
 #lg-body,
@@ -107,121 +107,155 @@
 #lg-armB{
   transform-box: fill-box;
   transform-origin:center;
+  will-change: transform;
 }
+
+/* MASTER MOTION */
 
 #lg-runner{
-  animation: runnerFloat .72s ease-in-out infinite;
-}
-
-#lg-body{
-  transform-origin:46px 42px;
-  animation: bodyLean .72s ease-in-out infinite;
-}
-
-#lg-legF{
-  transform-origin:46px 54px;
-  animation: legFront .72s cubic-bezier(.55,.05,.45,.95) infinite;
-}
-
-#lg-legB{
-  transform-origin:46px 54px;
-  animation: legBack .72s cubic-bezier(.55,.05,.45,.95) infinite;
-}
-
-#lg-armF{
-  transform-origin:52px 31px;
-  animation: armFront .72s ease-in-out infinite;
-}
-
-#lg-armB{
-  transform-origin:52px 31px;
-  animation: armBack .72s ease-in-out infinite;
-}
-
-.lg-shadow{
-  animation: shadowPulse .72s ease-in-out infinite;
-}
-
-.lg-speed{
-  animation: speedLines .5s linear infinite;
+  animation: runnerMove .82s linear infinite;
 }
 
 /* BODY */
 
-@keyframes runnerFloat{
-  0%   { transform:translateY(0px); }
-  50%  { transform:translateY(-2px); }
-  100% { transform:translateY(0px); }
-}
-
-@keyframes bodyLean{
-  0%   { transform:rotate(8deg); }
-  50%  { transform:rotate(12deg); }
-  100% { transform:rotate(8deg); }
+#lg-body{
+  transform-origin:center;
+  animation: torso .82s ease-in-out infinite;
 }
 
 /* LEGS */
 
-@keyframes legFront{
+#lg-legF{
+  transform-origin:50% 10%;
+  animation: legFront .82s ease-in-out infinite;
+}
+
+#lg-legB{
+  transform-origin:50% 10%;
+  animation: legBack .82s ease-in-out infinite;
+}
+
+/* ARMS */
+
+#lg-armF{
+  transform-origin:50% 10%;
+  animation: armFront .82s ease-in-out infinite;
+}
+
+#lg-armB{
+  transform-origin:50% 10%;
+  animation: armBack .82s ease-in-out infinite;
+}
+
+/* SHADOW */
+
+.lg-shadow{
+  animation: shadowRun .82s ease-in-out infinite;
+}
+
+/* SPEED LINES */
+
+.lg-speed{
+  animation: speedFlow .55s linear infinite;
+}
+
+
+/* ───────── KEYFRAMES ───────── */
+
+@keyframes runnerMove{
   0%{
-    transform:rotate(38deg);
+    transform:translateY(0px);
+  }
+  25%{
+    transform:translateY(-1px);
   }
   50%{
-    transform:rotate(-42deg);
+    transform:translateY(-2px);
+  }
+  75%{
+    transform:translateY(-1px);
   }
   100%{
-    transform:rotate(38deg);
+    transform:translateY(0px);
+  }
+}
+
+/* subtle torso lean */
+
+@keyframes torso{
+  0%{
+    transform:rotate(8deg);
+  }
+  50%{
+    transform:rotate(10deg);
+  }
+  100%{
+    transform:rotate(8deg);
+  }
+}
+
+/* smoother leg stride */
+
+@keyframes legFront{
+  0%{
+    transform:rotate(26deg);
+  }
+  50%{
+    transform:rotate(-24deg);
+  }
+  100%{
+    transform:rotate(26deg);
   }
 }
 
 @keyframes legBack{
   0%{
-    transform:rotate(-42deg);
+    transform:rotate(-24deg);
   }
   50%{
-    transform:rotate(38deg);
+    transform:rotate(26deg);
   }
   100%{
-    transform:rotate(-42deg);
+    transform:rotate(-24deg);
   }
 }
 
-/* ARMS */
+/* natural arm swing */
 
 @keyframes armFront{
   0%{
-    transform:rotate(-48deg);
+    transform:rotate(-22deg);
   }
   50%{
-    transform:rotate(42deg);
+    transform:rotate(18deg);
   }
   100%{
-    transform:rotate(-48deg);
+    transform:rotate(-22deg);
   }
 }
 
 @keyframes armBack{
   0%{
-    transform:rotate(42deg);
+    transform:rotate(18deg);
   }
   50%{
-    transform:rotate(-48deg);
+    transform:rotate(-22deg);
   }
   100%{
-    transform:rotate(42deg);
+    transform:rotate(18deg);
   }
 }
 
-/* SHADOW */
+/* grounded shadow */
 
-@keyframes shadowPulse{
+@keyframes shadowRun{
   0%{
     transform:scaleX(1);
     opacity:.18;
   }
   50%{
-    transform:scaleX(.72);
-    opacity:.34;
+    transform:scaleX(.86);
+    opacity:.28;
   }
   100%{
     transform:scaleX(1);
@@ -229,16 +263,16 @@
   }
 }
 
-/* SPEED */
+/* smoother speed trails */
 
-@keyframes speedLines{
+@keyframes speedFlow{
   0%{
     opacity:.15;
     transform:translateX(0);
   }
   50%{
-    opacity:.55;
-    transform:translateX(-4px);
+    opacity:.45;
+    transform:translateX(-3px);
   }
   100%{
     opacity:.15;
