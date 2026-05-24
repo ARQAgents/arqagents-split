@@ -8,11 +8,13 @@
 <meta name="keywords" content="pattaya marathon 2026 training, marathon training plan, ai running coach, tropical running, free training plan">
 <meta name="theme-color" content="#0b0d0a">
 
+<!-- Open Graph -->
 <meta property="og:title" content="Split — AI Training Plan Generator for Pattaya Marathon 2026">
 <meta property="og:description" content="Free AI-powered running training plan, tuned for tropical-heat races. Get a personalized plan in seconds.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://split.arqagents.com">
 
+<!-- Robot favicon (inline SVG) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0d0a'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-size='40'%3E🏃%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,6 +66,7 @@
     color:var(--volt);padding:6px 12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;border-radius:999px
   }
 
+  /* ── PATTAYA MARATHON BANNER ─────────────────────────────────── */
   .pattaya-banner{
     display:flex;align-items:center;gap:18px;margin-bottom:28px;
     padding:16px 20px;border-radius:14px;
@@ -91,9 +94,196 @@
     .pattaya-banner{flex-direction:column;align-items:flex-start;text-align:left}
     .pb-cta{width:100%;text-align:center}
   }
-  
-  .runmark{position:absolute;right:0;top:4px;width:96px;height:96px;border-radius:14px;object-fit:cover;border:1px solid var(--volt-dim);}
+  .runmark{position:absolute;right:0;top:4px;width:96px;height:96px}
   @media(max-width:640px){.runmark{width:64px;height:64px}}
+
+/* ───────── smooth realistic runner ───────── */
+
+#lg-runner,
+#lg-body,
+#lg-legF,
+#lg-legB,
+#lg-armF,
+#lg-armB{
+  transform-box: fill-box;
+  transform-origin:center;
+  will-change: transform;
+}
+
+/* MASTER MOTION */
+
+#lg-runner{
+  animation: runnerMove .82s linear infinite;
+}
+
+/* BODY */
+
+#lg-body{
+  transform-origin:center;
+  animation: torso .82s ease-in-out infinite;
+}
+
+/* LEGS */
+
+#lg-legF{
+  transform-origin:50% 10%;
+  animation: legFront .82s ease-in-out infinite;
+}
+
+#lg-legB{
+  transform-origin:50% 10%;
+  animation: legBack .82s ease-in-out infinite;
+}
+
+/* ARMS */
+
+#lg-armF{
+  transform-origin:50% 10%;
+  animation: armFront .82s ease-in-out infinite;
+}
+
+#lg-armB{
+  transform-origin:50% 10%;
+  animation: armBack .82s ease-in-out infinite;
+}
+
+/* SHADOW */
+
+.lg-shadow{
+  animation: shadowRun .82s ease-in-out infinite;
+}
+
+/* SPEED LINES */
+
+.lg-speed{
+  animation: speedFlow .55s linear infinite;
+}
+
+
+/* ───────── KEYFRAMES ───────── */
+
+@keyframes runnerMove{
+  0%{
+    transform:translateY(0px);
+  }
+  25%{
+    transform:translateY(-1px);
+  }
+  50%{
+    transform:translateY(-2px);
+  }
+  75%{
+    transform:translateY(-1px);
+  }
+  100%{
+    transform:translateY(0px);
+  }
+}
+
+/* subtle torso lean */
+
+@keyframes torso{
+  0%{
+    transform:rotate(8deg);
+  }
+  50%{
+    transform:rotate(10deg);
+  }
+  100%{
+    transform:rotate(8deg);
+  }
+}
+
+/* smoother leg stride */
+
+@keyframes legFront{
+  0%{
+    transform:rotate(26deg);
+  }
+  50%{
+    transform:rotate(-24deg);
+  }
+  100%{
+    transform:rotate(26deg);
+  }
+}
+
+@keyframes legBack{
+  0%{
+    transform:rotate(-24deg);
+  }
+  50%{
+    transform:rotate(26deg);
+  }
+  100%{
+    transform:rotate(-24deg);
+  }
+}
+
+/* natural arm swing */
+
+@keyframes armFront{
+  0%{
+    transform:rotate(-22deg);
+  }
+  50%{
+    transform:rotate(18deg);
+  }
+  100%{
+    transform:rotate(-22deg);
+  }
+}
+
+@keyframes armBack{
+  0%{
+    transform:rotate(18deg);
+  }
+  50%{
+    transform:rotate(-22deg);
+  }
+  100%{
+    transform:rotate(18deg);
+  }
+}
+
+/* grounded shadow */
+
+@keyframes shadowRun{
+  0%{
+    transform:scaleX(1);
+    opacity:.18;
+  }
+  50%{
+    transform:scaleX(.86);
+    opacity:.28;
+  }
+  100%{
+    transform:scaleX(1);
+    opacity:.18;
+  }
+}
+
+/* smoother speed trails */
+
+@keyframes speedFlow{
+  0%{
+    opacity:.15;
+    transform:translateX(0);
+  }
+  50%{
+    opacity:.45;
+    transform:translateX(-3px);
+  }
+  100%{
+    opacity:.15;
+    transform:translateX(0);
+  }
+}
+  @media(prefers-reduced-motion:reduce){
+    #lg-runner,#lg-body,#lg-legF,#lg-legB,#lg-armF,#lg-armB,.lg-shadow,.lg-speed{animation:none}
+    #lg-legF{transform:rotate(-34deg)}#lg-legB{transform:rotate(30deg)}
+    #lg-armF{transform:rotate(28deg)}#lg-armB{transform:rotate(-30deg)}#lg-body{transform:rotate(8deg)}
+  }
 
   h2{
     font-family:"Teko",sans-serif;font-weight:600;text-transform:uppercase;
@@ -124,10 +314,6 @@
     background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:34px}
   textarea{resize:vertical;min-height:48px}
 
-  /* Split Time Selectors Layout */
-  .time-split-row { display: flex; gap: 8px; }
-  .time-split-row select { flex: 1; }
-
   .wkblock{grid-column:span 12;display:flex;flex-direction:column;gap:8px}
   .wkrow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
   .wkrow .why{color:var(--mute);font-size:11.5px;font-weight:400;text-transform:none;letter-spacing:.02em}
@@ -157,12 +343,27 @@
   button:disabled{opacity:.4;cursor:not-allowed;filter:none}
 
   .note{font-size:12px;color:var(--mute);margin-top:10px}
-  .quota{font-family:"Saira",sans-serif;font-size:12px;letter-spacing:.03em;color:var(--mute);align-self:center;text-transform:none}
+
+  .keybox{grid-column:span 12;border:1px dashed var(--line);border-radius:9px;
+    padding:14px 16px;background:rgba(255,255,255,.015)}
+  .keybox summary{cursor:pointer;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:600;color:var(--ink);list-style:none}
+  .keybox summary::-webkit-details-marker{display:none}
+  .keybox summary::before{content:"▸  ";color:var(--volt)}
+  .keybox[open] summary::before{content:"▾  "}
+  .keybox .kbody{margin-top:13px;display:flex;flex-direction:column;gap:10px}
+  .keybox .hint{font-size:11.5px;color:var(--mute);line-height:1.65}
+  .keybox .hint b{color:var(--ink)}
+  .quota{font-family:"Saira",sans-serif;font-size:12px;letter-spacing:.03em;
+    color:var(--mute);align-self:center;text-transform:none}
   .quota.out{color:#ffb7a6}
 
-  .feas{border-radius:10px;border:1px solid var(--line);background:var(--bg2);padding:16px 18px;margin-bottom:22px}
-  .feas h4{font-family:"Teko",sans-serif;font-weight:600;text-transform:uppercase;font-size:18px;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:9px}
-  .feas h4 .tag{font-family:"Saira";font-weight:700;font-size:10px;letter-spacing:.14em;padding:3px 9px;border-radius:999px}
+  .feas{border-radius:10px;border:1px solid var(--line);background:var(--bg2);
+    padding:16px 18px;margin-bottom:22px}
+  .feas h4{font-family:"Teko",sans-serif;font-weight:600;text-transform:uppercase;
+    font-size:18px;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+  .feas h4 .tag{font-family:"Saira";font-weight:700;font-size:10px;letter-spacing:.14em;
+    padding:3px 9px;border-radius:999px}
   .feas.lvl-high{border-color:rgba(255,90,54,.5);background:rgba(255,90,54,.06)}
   .feas.lvl-high h4{color:var(--hot)} .feas.lvl-high .tag{background:var(--hot);color:#1a0a06}
   .feas.lvl-caution{border-color:rgba(255,193,7,.4);background:rgba(255,193,7,.05)}
@@ -175,32 +376,40 @@
   .feas li.l-high .ic{color:var(--hot)}
   .feas li.l-caution .ic{color:#ffce4a}
   .feas li.l-info .ic,.feas li.l-ok .ic{color:var(--volt)}
-  .err{border:1px solid var(--hot);background:rgba(255,90,54,.08);color:#ffb7a6;padding:13px 15px;margin-top:18px;font-size:13.5px;border-radius:8px;display:none}
+  .err{border:1px solid var(--hot);background:rgba(255,90,54,.08);color:#ffb7a6;
+    padding:13px 15px;margin-top:18px;font-size:13.5px;border-radius:8px;display:none}
 
   #out{display:none;margin-top:14px}
-  .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:22px}
+  .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:22px}
   .meta div{padding:14px 16px;background:var(--bg2)}
   .meta b{display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:5px}
   .meta span{font-family:"Teko",sans-serif;font-weight:600;font-size:24px;line-height:1;color:var(--ink)}
   @media(max-width:680px){.meta{grid-template-columns:repeat(2,1fr)}}
 
-  .aibar{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--mute);border:1px dashed var(--line);border-radius:8px;padding:10px 14px;margin-bottom:18px}
+  .aibar{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--mute);
+    border:1px dashed var(--line);border-radius:8px;padding:10px 14px;margin-bottom:18px}
   .aibar.ok{border-color:var(--volt-dim);color:var(--volt)}
   .aibar.fail{border-color:rgba(255,90,54,.4);color:#ffb7a6}
-  .spin{width:13px;height:13px;border:2px solid var(--line);border-top-color:var(--volt);border-radius:50%;animation:sp .7s linear infinite;flex:none}
+  .spin{width:13px;height:13px;border:2px solid var(--line);border-top-color:var(--volt);
+    border-radius:50%;animation:sp .7s linear infinite;flex:none}
   @keyframes sp{to{transform:rotate(360deg)}}
 
   .toolbar{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:8px}
   .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--bg2)}
   table{border-collapse:collapse;width:100%;min-width:1080px;font-size:12.5px}
   th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
-  thead th{background:#1a1f15;color:var(--volt);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px;font-weight:700;position:sticky;top:0}
+  thead th{background:#1a1f15;color:var(--volt);text-transform:uppercase;
+    letter-spacing:.08em;font-size:10.5px;font-weight:700;position:sticky;top:0}
   tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
-  td.wk{font-family:"Teko",sans-serif;font-weight:700;font-size:26px;text-align:center;white-space:nowrap;color:var(--ink);line-height:.9}
-  td.wk .ph{display:block;font-family:"Saira";font-weight:600;font-size:9px;letter-spacing:.14em;color:var(--volt);margin-top:5px;text-transform:uppercase}
+  td.wk{font-family:"Teko",sans-serif;font-weight:700;font-size:26px;text-align:center;
+    white-space:nowrap;color:var(--ink);line-height:.9}
+  td.wk .ph{display:block;font-family:"Saira";font-weight:600;font-size:9px;letter-spacing:.14em;
+    color:var(--volt);margin-top:5px;text-transform:uppercase}
   td.dt{white-space:nowrap;font-size:11px;color:var(--mute)}
-  td.km{font-family:"Teko",sans-serif;font-weight:700;text-align:center;font-size:24px;white-space:nowrap;color:var(--volt)}
-  td.wx{font-size:11px;min-width:140px;color:var(--ink);font-weight:500;}
+  td.km{font-family:"Teko",sans-serif;font-weight:700;text-align:center;font-size:24px;
+    white-space:nowrap;color:var(--volt)}
+  td.wx{font-size:11px;min-width:140px;color:var(--mute)}
   .sess{font-weight:600;color:var(--ink)}
   .sess small{display:block;font-weight:400;color:var(--mute);margin-top:2px}
   .rest{color:#5e6356;font-style:italic}
@@ -209,7 +418,8 @@
   .cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:760px){.cols2{grid-template-columns:1fr}}
   .card{border:1px solid var(--line);border-radius:10px;background:var(--bg2);padding:16px 18px}
-  .card h4{font-family:"Teko",sans-serif;font-weight:600;text-transform:uppercase;font-size:19px;letter-spacing:.04em;color:var(--volt);margin-bottom:6px}
+  .card h4{font-family:"Teko",sans-serif;font-weight:600;text-transform:uppercase;
+    font-size:19px;letter-spacing:.04em;color:var(--volt);margin-bottom:6px}
   .card p{font-size:13px;color:var(--ink)}
   ul.clean{list-style:none}
   ul.clean li{padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;display:flex;gap:11px}
@@ -217,10 +427,13 @@
   ul.clean li .pin{color:var(--volt);font-weight:700;flex:none}
   ul.clean li b{font-weight:700;color:var(--ink)}
 
-  .waiver{border:1px solid rgba(255,90,54,.35);background:rgba(255,90,54,.05);border-radius:10px;padding:18px 20px;margin-top:34px;font-size:12.5px;line-height:1.7;color:#e9d3cc}
-  .waiver h3{font-family:"Teko",sans-serif;font-weight:600;text-transform:uppercase;font-size:18px;letter-spacing:.08em;margin-bottom:8px;color:var(--hot)}
+  .waiver{border:1px solid rgba(255,90,54,.35);background:rgba(255,90,54,.05);
+    border-radius:10px;padding:18px 20px;margin-top:34px;font-size:12.5px;line-height:1.7;color:#e9d3cc}
+  .waiver h3{font-family:"Teko",sans-serif;font-weight:600;text-transform:uppercase;
+    font-size:18px;letter-spacing:.08em;margin-bottom:8px;color:var(--hot)}
 
-  footer{margin-top:48px;border-top:1px solid var(--line);padding-top:16px;font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer{margin-top:48px;border-top:1px solid var(--line);padding-top:16px;font-size:11px;
+    color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
   @media print{
     body{background:#fff;color:#000}
@@ -233,6 +446,9 @@
     .feas h4,.feas h4 .tag,.feas li,.feas li .ic{color:#000!important;background:transparent!important}
     thead th{background:#000!important;color:#fff!important}
     td.km,h2 .small,.card h4,td.wk .ph{color:#000!important}
+    .runmark path{stroke:#000!important}.runmark circle{fill:#000!important}
+    #lg-runner,#lg-body,#lg-legF,#lg-legB,#lg-armF,#lg-armB,.lg-shadow,.lg-speed{animation:none!important}
+    .lg-shadow,.lg-speed{display:none!important}
     table{min-width:0;font-size:9px}
   }
 </style>
@@ -248,6 +464,7 @@
 
 <div class="wrap">
 
+  <!-- ═══ PATTAYA MARATHON 2026 BANNER ═══════════════════════════════ -->
   <div class="pattaya-banner" id="pattayaBanner">
     <div class="pb-flag">🇹🇭</div>
     <div class="pb-content">
@@ -268,7 +485,21 @@
     <h1>Split<span class="x">.</span></h1>
     <p class="sub">A rule-based training-plan engine with an AI coaching layer. Tuned for <b>tropical-heat races</b> like the Pattaya Marathon. Answer the brief, generate a week-by-week table, then copy, email or print it for a friend.</p>
     <span class="badge">⌁ AI Coach &nbsp;·&nbsp; live weather + real route research &nbsp;·&nbsp; tropical-heat aware</span>
-    <img src="RunningWoman.jpg" alt="Running Silhouette Profile" class="runmark" id="runmark">
+    <svg class="runmark" id="runmark" viewBox="0 0 96 96" fill="none"
+         stroke="var(--volt)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path class="lg-speed" d="M5 28h15M2 43h19M7 58h13" stroke="rgba(200,255,30,.4)" stroke-width="3"/>
+      <ellipse class="lg-shadow" cx="46" cy="90" rx="22" ry="4" fill="rgba(200,255,30,.18)" stroke="none"/>
+      <g id="lg-runner">
+        <g id="lg-armB"><path d="M52 31 L42 40 L34 35"/></g>
+        <g id="lg-legB"><path d="M46 54 L39 70 L33 84"/></g>
+        <g id="lg-legF"><path d="M46 54 L53 69 L51 86"/></g>
+        <g id="lg-body">
+          <circle cx="57" cy="18" r="7.5" fill="var(--volt)" stroke="none"/>
+          <path d="M54 26 L46 54"/>
+        </g>
+        <g id="lg-armF"><path d="M52 31 L62 39 L60 50"/></g>
+      </g>
+    </svg>
   </header>
 
   <section id="formCard">
@@ -292,21 +523,20 @@
       </div>
       <div class="field c4">
         <label>Target Completion Time *
-          <span class="why">Select Target Hours and Minutes</span>
-        </label>
-        <div class="time-split-row">
-          <select id="finishHours" required>
-            <option value="0">00 hr</option>
-            <option value="1">01 hr</option>
-            <option value="2" selected>02 hr</option>
-            <option value="3">03 hr</option>
-            <option value="4">04 hr</option>
-            <option value="5">05 hr</option>
-            <option value="6">06 hr</option>
-          </select>
-          <select id="finishMinutes" required>
-            </select>
-        </div>
+        <span class="why">
+          Example:
+          10K → 01:00:00
+          · Half Marathon → 02:15:00
+          · Marathon → 05:00:00
+          </span>
+          </label>
+
+        <input
+          type="text"
+          id="finishTime"
+          placeholder="02:15:00"
+          pattern="[0-9]{1,2}:[0-5][0-9]:[0-5][0-9]"
+          required>
       </div>
 
       <div class="field c4">
@@ -359,7 +589,7 @@
       <div class="field c3">
         <label>Place of Run *
           <span class="why">City / area — weather &amp; nearby routes</span></label>
-        <input type="text" id="place" placeholder="e.g. Pattaya, Lisbon, Tokyo…" required>
+        <input type="text" id="place" placeholder="e.g. Lisbon, Denver, Nairobi…" required>
       </div>
 
       <div class="field c12">
@@ -367,6 +597,15 @@
           <span class="why">Flags the waiver and a “consult a professional” note</span></label>
         <textarea id="meds" placeholder="None / list anything relevant"></textarea>
       </div>
+
+      <details class="keybox">
+        <summary>Advanced · AI Coach server endpoint</summary>
+        <div class="kbody">
+          <input type="url" id="proxyUrl" autocomplete="off" spellcheck="false"
+            placeholder="https://your-worker.workers.dev/  (optional override)">
+          <p class="hint">The AI Coach is powered by a <b>server proxy you deploy</b> (see the included Worker). Your Anthropic key lives <b>only as a server secret</b> — it is never sent to, stored in, or readable from this page, so the file is safe to share publicly. The server also enforces a <b>hard daily limit</b> that cannot be bypassed by clearing the browser. Leave blank to use the endpoint baked into the page config; fill in to point at a different deployment.</p>
+        </div>
+      </details>
 
       <div class="actions">
         <button type="submit" id="goBtn">Generate Plan</button>
@@ -376,14 +615,14 @@
       </div>
     </form>
     <div class="err" id="err"></div>
-    <p class="note">The training engine calculates directly on your device. The AI Coach utilizes seasonal database models for real-time regional projections—if live cloud synchronization fails, your localized timeline builds gracefully with smart baseline targets automatically.</p>
+    <p class="note">The training engine is deterministic and runs locally. The AI Coach runs through a server proxy that holds the key and enforces a hard limit of 3 plans per day per person — if the limit is reached or the service is down, you’ll be told and (for non-quota errors) a full rule-based plan still generates with general guidance.</p>
   </section>
 
   <section id="out">
     <h2 data-n="02">Your Plan <span class="small" id="aiTag"></span></h2>
     <div class="meta" id="meta"></div>
 
-    <div class="aibar" id="aibar"><span class="spin"></span><span id="aibarTxt">Processing your customized metrics...</span></div>
+    <div class="aibar" id="aibar"><span class="spin"></span><span id="aibarTxt">AI Coach is researching your location…</span></div>
 
     <div id="feasibility"></div>
 
@@ -422,16 +661,6 @@
 <script>
 "use strict";
 
-/* ---------- Populate minutes select dropdown ---------- */
-var minSelect = document.getElementById("finishMinutes");
-for(var m=0; m<60; m++) {
-  var opt = document.createElement("option");
-  opt.value = m;
-  opt.textContent = pad(m) + " min";
-  if(m === 15) opt.selected = true;
-  minSelect.appendChild(opt);
-}
-
 /* ---------- weekday chips ---------- */
 var WD=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 var DEF=[1,3,5,6];
@@ -454,23 +683,48 @@ function setDays(arr){
 var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function pad(n){return(n<10?"0":"")+n;}
 function fmtPace(s){s=Math.round(s);return Math.floor(s/60)+":"+pad(s%60);}
+function parsePace(s){var m=/^(\d{1,2}):([0-5]\d)$/.exec(s.trim());return m?(+m[1])*60+(+m[2]):null;}
 function fmtDate(d){return d.getDate()+" "+MON[d.getMonth()];}
 function addDays(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function startOfWeekMon(d){var x=new Date(d);x.setHours(0,0,0,0);var g=(x.getDay()+6)%7;return addDays(x,-g);}
 function esc(s){return String(s).replace(/[&<>"]/g,function(m){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[m];});}
 
-var DAILY_LIMIT=3, MEMQ={};
+/* ====== CONFIG ======
+   This page (split.arqagents.com) calls the Cloudflare Worker that
+   lives at /api/coach via routing. The Worker holds the Anthropic
+   API key as a secret and enforces a 3-plan-per-day quota via KV. */
+var PROXY_URL = "/api/coach";
+
+/* ---------- daily generation limit ---------- */
+/* The HARD limit is enforced by the server. The number shown here is
+   whatever the server last reported; a local soft counter is only used
+   as a fallback when no server endpoint is configured (e.g. previews). */
+var DAILY_LIMIT=3, MEMQ={}, srvRemaining=null;
 function qKey(){var d=new Date();return "split_quota_"+d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
 function qGet(){try{var v=localStorage.getItem(qKey());return v!=null?(parseInt(v,10)||0):(MEMQ[qKey()]||0);}catch(e){return MEMQ[qKey()]||0;}}
 function qSet(n){try{localStorage.setItem(qKey(),String(n));}catch(e){MEMQ[qKey()]=n;}}
+function endpoint(){
+  var f=(document.getElementById("proxyUrl")||{}).value;
+  f=f?f.trim():"";
+  if(f) return f;                       /* explicit override wins */
+  var p=PROXY_URL||"";
+  if(/^https?:\/\//i.test(p)) return p; /* absolute URL: always use */
+  /* relative path (e.g. "/api/coach"): only valid on a real web host,
+     not inside the in-app preview (file:/blob:/sandbox) */
+  if(p && location && /^https?:$/.test(location.protocol)
+       && !/^blob:/.test(location.href)) return p;
+  return "";
+}
+function softLeft(){return Math.max(0,DAILY_LIMIT-qGet());}
+function shownLeft(){return srvRemaining!=null?srvRemaining:softLeft();}
 function updateQuota(){
   var el=document.getElementById("quota");if(!el)return;
-  var n=Math.max(0, DAILY_LIMIT-qGet());
-  el.textContent=n+" of "+DAILY_LIMIT+" plans left today";
+  var n=shownLeft(), src=srvRemaining!=null?"":" (local)";
+  el.textContent=n+" of "+DAILY_LIMIT+" plans left today"+src;
   el.classList.toggle("out",n<=0);
 }
 
-/* ---------- deterministic planner ---------- */
+/* ---------- deterministic planner (the reliable core) ---------- */
 function buildPlan(I){
   var today=new Date();today.setHours(0,0,0,0);
   var race=new Date(I.raceDate+"T00:00:00");
@@ -525,7 +779,7 @@ function buildPlan(I){
       longKm=peakLong*(fac[ti]!==undefined?fac[ti]:0.3);
     }else{
       longKm=startLong+(peakLong-startLong)*frac;
-      if(phase!="Peak"&&(w+1)%4===0) longKm*=0.80;
+      if(phase!=="Peak"&&(w+1)%4===0) longKm*=0.80;
     }
     longKm=Math.max(3,Math.round(longKm*2)/2);
 
@@ -548,101 +802,159 @@ function buildPlan(I){
       cells[di]={name:name,km:dist,pace:fmtPace(pace),code:code};
     }
     var sum=0;cells.forEach(function(c){if(c)sum+=c.km;});
-    
-    // Generate isolated safe dynamic weather tags directly to output correctly
-    var currentMonth = MON[ws.getMonth()];
-    var weatherForecastString = currentMonth + " (Seasonal)";
-    if(I.place.toLowerCase().includes("pattaya") || I.place.toLowerCase().includes("thailand")) {
-       if(["May","Jun","Jul","Aug","Sep","Oct"].indexOf(currentMonth) > -1) {
-          weatherForecastString = "Hot / Wet (28-33°C)";
-       } else {
-          weatherForecastString = "Hot / Dry (25-31°C)";
-       }
-    }
-
-    rows.push({w:w+1,phase:phase,from:ws,to:we,cells:cells,monIdx:ws.getMonth(),total:sum,weather:weatherForecastString});
+    rows.push({w:w+1,phase:phase,from:ws,to:we,cells:cells,monIdx:ws.getMonth(),total:sum,weather:"…"});
   }
 
+  /* ---------- feasibility check ---------- */
   var flags=feasibility(I,{rows:rows,weeks:weeks,peakLong:peakLong});
+
   return {rows:rows,weeks:weeks,taper:taper,
     phases:{base:baseW,build:buildW,peak:peakW,taper:taper},
     peakLong:peakLong,race:race,flags:flags};
 }
 
+/* Returns an array of {level:'high'|'caution'|'info', msg} warnings when the
+   target pace or the volume ramp looks unrealistic for the time available.
+   These never block the plan — they tell the runner where it may be too
+   aggressive so they (or a coach) can adjust. */
 function feasibility(I,plan){
   var F=[];
   var dist=I.dist, weeks=plan.weeks, base=I.base||0;
   var peakWeekKm=0;
   plan.rows.forEach(function(r){if(r.total>peakWeekKm)peakWeekKm=r.total;});
 
-  var MIN_WEEKS={5:4,10:6,21.1:10,42.2:16};
+  /* --- 1. Time available vs goal distance --- */
+  var MIN_WEEKS={5:4,10:6,21.1:10,42.2:16};   // sensible minimum prep
   var COMFY_WEEKS={5:6,10:10,21.1:14,42.2:18};
   var mw=MIN_WEEKS[dist]||6, cw=COMFY_WEEKS[dist]||10;
   if(weeks<mw)
-    F.push({level:"high",msg:"Only "+weeks+" weeks until race day for a "+dist+" km goal. That is below the ~"+mw+"-week minimum most runners need to prepare safely."});
+    F.push({level:"high",msg:"Only "+weeks+" weeks until race day for a "+dist+" km goal. That is below the ~"+mw+"-week minimum most runners need to prepare safely — consider a later date or a shorter goal distance."});
   else if(weeks<cw)
-    F.push({level:"caution",msg:weeks+" weeks is on the short side for "+dist+" km (a comfortable build is ~"+cw+"+ weeks)."});
+    F.push({level:"caution",msg:weeks+" weeks is on the short side for "+dist+" km (a comfortable build is ~"+cw+"+ weeks). The plan compresses progression, so it leaves little margin for missed sessions, illness or niggles."});
 
+  /* --- 2. Starting volume vs required peak volume --- */
   if(base>0){
     var ratio=peakWeekKm/base;
     var perWeekRampPct=Math.pow(ratio,1/Math.max(1,weeks-1))-1;
     if(ratio>=3.0)
-      F.push({level:"high",msg:"Your peak week (~"+peakWeekKm+" km) is about "+ratio.toFixed(1)+"× your current "+base+" km/week. That is a very steep build step."});
+      F.push({level:"high",msg:"Your peak week (~"+peakWeekKm+" km) is about "+ratio.toFixed(1)+"× your current ~"+base+" km/week. That is a very steep build and a common injury setup — raise your base first, lengthen the plan, or pick a shorter goal."});
     else if(perWeekRampPct>0.12)
-      F.push({level:"caution",msg:"Weekly volume rises ~"+Math.round(perWeekRampPct*100)+"% per week on average (recommended guideline is around 10%)."});
+      F.push({level:"caution",msg:"Weekly volume rises ~"+Math.round(perWeekRampPct*100)+"% per week on average (the widely used guideline is ≈10%). Expect to repeat or trim weeks if your body isn’t keeping up."});
   }else{
-    F.push({level:"info",msg:"No current weekly baseline provided. Progression curves will normalize organically based on standard distributions."});
+    F.push({level:"info",msg:"No current weekly distance was given, so feasibility of the volume ramp can’t be checked. Add it for a more honest plan — an over-steep build is the main injury risk."});
   }
 
+  /* --- 3. Target pace plausibility --- */
+  var tp=I.paceSec;                       // sec per km (target/race pace)
+  if(tp){
+    if(tp<195)   // < 3:15 /km
+      F.push({level:"high",msg:"A target of "+I.pace+" /km is at elite level. Unless that is genuinely your current fitness, the paced sessions will be unrealistically fast — set the pace from a recent race or time-trial."});
+    else if(tp<240)  // 3:15–4:00 /km
+      F.push({level:"caution",msg:"A "+I.pace+" /km target is very fast for most recreational runners. If it is faster than your recent race pace, the interval/tempo paces here will be too hard to hit — base the target on real data."});
+    if(dist>=42.2 && tp<210)
+      F.push({level:"caution",msg:"Holding "+I.pace+" /km for a full marathon implies a sub-2:30 finish — make sure that reflects proven fitness, not a goal in isolation."});
+  }
+
+  /* --- 4. Marathon long-run reachability --- */
+  if(dist>=42.2 && base>0 && plan.peakLong/Math.max(1,base*0.45)>2.4)
+    F.push({level:"caution",msg:"Building to a "+plan.peakLong+" km long run from your current base within "+weeks+" weeks is ambitious for a marathon. Many runners need a longer runway to reach 30 km+ long runs comfortably."});
+
   if(!F.length)
-    F.push({level:"ok",msg:"Inputs look broadly realistic for the timeline specified. Train safely."});
+    F.push({level:"ok",msg:"Inputs look broadly realistic for the time available. Still progress by feel — repeat a week rather than push through pain."});
 
   return F;
 }
 
-function fallbackMeals(place){
-  var isTropical = place.toLowerCase().includes("pattaya") || place.toLowerCase().includes("thailand");
-  return [
-   ["Pre-Run Fueling", "Easily absorbed carbohydrates like white toast, honey, or banana 60-90 minutes out. Avoid heavy fats."],
-   ["Intra-Workout Hydration", isTropical ? "Crucial: High sweat rates require 500-700ml fluids/hr filled with electrolytes/sodium." : "Water every 20 minutes for runs extending past 70 minutes."],
-   ["Post-Run Recovery", "Replenish storage profiles using a 3:1 Carbohydrate to Protein matrix within 45 minutes of stopping."],
-   ["Climate Compensation", isTropical ? "Tropical high humidity prevents sweat evaporation. Increase hydration volumes and cooling fluid protocols." : "Adjust nutrient distribution relative to macro energy output increases."]
-  ];
-}
-function fallbackParks(place){
-  var p = place.toLowerCase();
-  if(p.includes("pattaya")) {
-    return [
-      ["Pratamnak Hill (Budha Hill Tracks)", "Shaded pavement loops, excellent for steady aerobic hill repeats."],
-      ["Jomtien Beach Road Promenade", "Long uninterrupted flat running, best utilized before 06:00 AM to beat traffic."],
-      ["Mabprachan Lake Path", "Beautiful traffic-free running path loop away from city congestion."],
-      ["Pattaya Sports Stadium Running Track", "Standard 400m configuration open for dedicated micro interval intervals."]
-    ];
-  }
-  
-  var city = place.split(',')[0].trim() || "The City";
-  return [
-    [city + " Central Park / Main Public Garden", "Safe pedestrian paths free from vehicular hazards right in the heart of " + city + "."],
-    [city + " Public Athletics Track", "Optimal surface configuration for threshold tempo segments and speed reps."],
-    [city + " Riverside / Grand Pathway", "Flat continuous grade paths suitable for sustained uninterrupted long runs."]
-  ];
-}
+/* ---------- generic fallbacks (no AI / no network) ---------- */
+function fallbackMeals(){return[
+ ["Pre-Run (60–90 min before)","Easy carbohydrate, low fibre, low fat — fruit, toast with honey, a small rice or oat portion. Sip water."],
+ ["During Long Runs (>75 min)","Water every 15–20 min; add light carbohydrate or an electrolyte drink for very long efforts."],
+ ["Post-Run (within ~45 min)","Carbohydrate + protein to recover — rice/potato with chicken, fish, eggs or yoghurt. Rehydrate well."],
+ ["Everyday Plate","Build around carbohydrate, a palm of lean protein, vegetables and some healthy fat. Hydrate through the day."],
+ ["Rest / Recovery Days","Don’t under-fuel a rest day — prioritise protein and sleep; that’s when training adapts."],
+ ["Heat & Humidity","Run at the coolest hours, pre-hydrate, judge effort over pace, and replace salt lost in heavy sweat."]
+];}
+function fallbackParks(){return[
+ ["Nearest park or lake loop","Measured, lit and traffic-free if possible"],
+ ["A local stadium / school 400 m track","Ideal for interval and tempo days"],
+ ["Quiet roads at the coolest hour","Lowest traffic and heat"],
+ ["A flat riverside or trail path","Softer underfoot, scenic for long runs"]
+];}
 function fallbackCoach(I){
-  var c=["Maintain easy runs at a fully conversational pace. Aerobic base builds are speed catalysts.",
-    "Prioritize execution consistency over high volume spikes.",
-    "Warm up dynamically prior to entering threshold or tempo ranges."];
-  if(I.place.toLowerCase().includes("pattaya") || I.place.toLowerCase().includes("thailand")) {
-     c.push("Tropical Adaptation: Drop target paces by 15-30 sec/km if running in intense midday humidity. Monitor heart rate variations.");
-  }
-  
-  c.push("Workout Types Explained:");
-  c.push("Easy Run: Low intensity, fully conversational pace. Essential for building your aerobic base and speeding up recovery.");
-  c.push("Intervals: Short bursts of high-intensity running followed by recovery periods. Builds raw speed and increases your VO2 max.");
-  c.push("Tempo (Threshold): Sustained comfortably hard effort. Improves your body's ability to clear lactate, letting you run faster for longer.");
-  c.push("Long Run: Extended time on your feet. Crucial for building pure endurance, teaching your body to burn fat efficiently, and developing mental toughness.");
-  
+  var c=["Keep easy runs genuinely easy — most weekly volume should feel conversational.",
+    "Increase load gradually; the step-back weeks are there to absorb fatigue.",
+    "Warm up before intervals/tempo and cool down after every session.",
+    "Sleep, hydration and fuelling drive adaptation as much as the runs themselves.",
+    "If a session feels wrong, swap it for easy running or rest — consistency beats heroics."];
+  if(I.dist>=42.2) c.push("Practise race-day fuelling on your longest runs, never for the first time on race day.");
   return c;
 }
+
+/* ---------- AI coach (Anthropic API + web search) ---------- */
+function monthsInPlan(plan){
+  var set={},out=[];
+  plan.rows.forEach(function(r){var m=MON[r.monIdx];if(!set[m]){set[m]=1;out.push(m);}});
+  return out;
+}
+async function aiEnrich(I,plan){
+  var months=monthsInPlan(plan);
+  var brief =
+    "Athlete brief — Location: "+I.place+
+    "; Goal: "+I.dist+" km; Target pace: "+I.pace+" /km; "+I.dpw+" days/week; "+
+    "Plan length: "+plan.weeks+" weeks; Age: "+(I.age||"n/a")+
+    "; Gender: "+(I.gender||"n/a")+"; Medications/health: "+((I.meds||"none").trim()||"none")+
+    ". Months the plan spans: "+months.join(", ")+".";
+  var ask =
+    "You are an experienced running coach. Use web search to find (1) the typical climate/weather for "+
+    I.place+" for EACH of these months: "+months.join(", ")+
+    ", and (2) 4 to 6 well-known public parks, tracks or running routes near "+I.place+
+    ". Then give brief, general, SAFE coaching tips and general meal/fuel guidance "+
+    "(NO calorie or macro numbers; if medications are noted, include one line to consult a doctor). "+
+    "Respond with ONLY one minified JSON object, no markdown, no prose, exactly this shape: "+
+    '{"climateByMonth":{"Jan":"<=10 words"},"parks":[{"name":"","note":"<=14 words"}],'+
+    '"coach":["<=18 words"],"meals":[{"title":"","body":"<=24 words"}]}. '+
+    "Limits: parks max 6, coach max 5, meals max 5. Keep every string short. "+brief;
+
+  var ep=endpoint();
+  var url, headers={"Content-Type":"application/json"};
+  if(ep){
+    url=ep; /* server proxy holds the key + enforces the hard limit */
+  }else{
+    /* no server configured: in-app preview fallback (e.g. inside Claude) */
+    url="https://api.anthropic.com/v1/messages";
+  }
+  var res=await fetch(url,{
+    method:"POST",headers:headers,
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:1000,
+      messages:[{role:"user",content:ask}],
+      tools:[{type:"web_search_20250305",name:"web_search"}]
+    })
+  });
+
+  /* server reports the authoritative remaining count */
+  var hr=res.headers.get("X-Quota-Remaining");
+  if(hr!=null && hr!=="") srvRemaining=Math.max(0,parseInt(hr,10)||0);
+
+  if(res.status===429){
+    var e=new Error("quota"); e.quota=true;
+    try{var j=await res.json(); if(j&&j.error) e.message=j.error;}catch(_){}
+    if(srvRemaining==null) srvRemaining=0;
+    throw e;
+  }
+  if(!res.ok) throw new Error("API "+res.status);
+  var data=await res.json();
+  var text=(data.content||[]).filter(function(b){return b.type==="text";})
+            .map(function(b){return b.text;}).join("\n").trim();
+  text=text.replace(/```json/gi,"").replace(/```/g,"").trim();
+  var a=text.indexOf("{"), b=text.lastIndexOf("}");
+  if(a<0||b<0) throw new Error("no JSON in response");
+  return JSON.parse(text.slice(a,b+1));
+}
+
+/* ---------- render ---------- */
+var lastPlanText="", lastIsAI=false;
 
 function renderBase(I,plan){
   var meta=document.getElementById("meta");
@@ -651,7 +963,7 @@ function renderBase(I,plan){
     cell("Goal",I.dist+" km")+
     cell("Race Date",plan.race.toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"}))+
     cell("Plan Length",plan.weeks+" weeks")+
-    cell("Target Finish",I.finishHours+"h "+I.finishMinutes+"m")+
+    cell("Target Finish",I.finishTime)+
     cell("Days / Week",I.dpw)+
     cell("Peak Long Run",plan.peakLong+" km")+
     cell("Phases","B"+plan.phases.base+" · Bu"+plan.phases.build+" · P"+plan.phases.peak+" · T"+plan.phases.taper)+
@@ -667,10 +979,10 @@ function renderBase(I,plan){
     body+='<td class="dt">'+fmtDate(r.from)+'<br>→ '+fmtDate(r.to)+'</td>';
     for(var i=0;i<7;i++){
       var c=r.cells[i];
-      body+=c?'<td><span class="sess">'+c.km+' km @ '+c.pace+'/km<small>'+esc(c.name)+'</small></span></td>'
+      body+=c?'<td><span class="sess">'+esc(c.name)+'<small>'+c.km+' km @ '+c.pace+'/km</small></span></td>'
             :'<td class="rest">Rest</td>';
     }
-    body+='<td class="wx">'+esc(r.weather)+'</td>';
+    body+='<td class="wx" data-mon="'+MON[r.monIdx]+'">'+esc(r.weather)+'</td>';
     body+='<td class="km">'+r.total+'</td></tr>';
   });
   document.getElementById("tbl").innerHTML=head+body+"</tbody>";
@@ -679,10 +991,14 @@ function renderBase(I,plan){
   document.getElementById("genStamp").textContent=new Date().toLocaleString();
 
   var medRaw=(I.meds||"").trim();
-  var medNote=(medRaw&&medRaw.toLowerCase()!=="none") ? " Flagged notes: “"+medRaw+"”." : "";
-  document.getElementById("waiverTxt").textContent="This metric sheet operates under automatic rule formulations. Information provided serves educational reference scales. Consult personal sports physicians before activating intensive threshold regimens."+medNote;
+  var medNote=(medRaw&&medRaw.toLowerCase()!=="none")
+    ? " You noted: “"+medRaw+"”. Because medications or a health condition are involved, it is especially important to clear this plan with a doctor before starting."
+    : "";
+  document.getElementById("waiverTxt").textContent=
+    "This training plan is an automatically generated recommendation produced by fixed rules with an AI assist — not medical, physiotherapy or professional coaching advice, and not personalised to your full health picture. Training load, paces, weather and nutrition here are general guidance only. Listen to your body, progress gradually, hydrate, and stop if you feel pain, dizziness, chest discomfort or unusual fatigue. Always consult a qualified physician and/or a certified running coach before starting or changing a training program — particularly if you have any medical condition, injury, or take medication."+medNote;
 
   renderFeasibility(plan.flags||[]);
+
   document.getElementById("out").style.display="block";
   document.getElementById("out").scrollIntoView({behavior:"smooth"});
 }
@@ -694,33 +1010,80 @@ function renderFeasibility(flags){
   var rank={high:3,caution:2,info:1,ok:0};
   var top=flags.reduce(function(a,f){return rank[f.level]>rank[a]?f.level:a;},"ok");
   var lvlClass=top==="high"?"lvl-high":top==="caution"?"lvl-caution":"lvl-ok";
-  var title=top==="high"?"Review Needed":"Plan Feasibility Analytics";
-  var tag=top==="high"?"STEEP":top==="caution"?"CONDENSED":"BALANCED";
+  var title=top==="high"?"Feasibility — High Risk"
+          :top==="caution"?"Feasibility — Worth a Closer Look"
+          :"Feasibility Check";
+  var tag=top==="high"?"AGGRESSIVE":top==="caution"?"TIGHT":"OK";
   var ic={high:"▲",caution:"!",info:"i",ok:"✓"};
   var items=flags.map(function(f){
     return '<li class="l-'+f.level+'"><span class="ic">'+ic[f.level]+'</span><span>'+esc(f.msg)+'</span></li>';
   }).join("");
-  box.innerHTML='<div class="feas '+lvlClass+'"><h4>'+esc(title)+ ' <span class="tag">'+tag+'</span></h4><ul>'+items+'</ul></div>';
+  box.innerHTML='<div class="feas '+lvlClass+'"><h4>'+esc(title)+
+    ' <span class="tag">'+tag+'</span></h4><ul>'+items+'</ul></div>';
 }
 
 function renderCoachFallback(I){
   document.getElementById("coach").innerHTML=
     fallbackCoach(I).map(function(t){return '<li><span class="pin">▸</span><span>'+esc(t)+'</span></li>';}).join("");
   document.getElementById("meals").innerHTML=
-    fallbackMeals(I.place).map(function(m){return '<div class="card"><h4>'+esc(m[0])+'</h4><p>'+esc(m[1])+'</p></div>';}).join("");
+    fallbackMeals().map(function(m){return '<div class="card"><h4>'+esc(m[0])+'</h4><p>'+esc(m[1])+'</p></div>';}).join("");
   document.getElementById("parks").innerHTML=
-    fallbackParks(I.place).map(function(p){return '<li><span class="pin">▸</span><span><b>'+esc(p[0])+'</b> — '+esc(p[1])+'</span></li>';}).join("");
+    fallbackParks().map(function(p){return '<li><span class="pin">▸</span><span><b>'+esc(p[0])+'</b> — '+esc(p[1])+'</span></li>';}).join("");
 }
 
+function applyAI(plan,ai){
+  document.querySelectorAll("td.wx").forEach(function(td){
+    var m=td.getAttribute("data-mon");
+    var v=ai.climateByMonth&&ai.climateByMonth[m];
+    td.textContent=v?(m+": "+v):"Seasonal — check local forecast";
+  });
+  plan.rows.forEach(function(r){
+    var m=MON[r.monIdx], v=ai.climateByMonth&&ai.climateByMonth[m];
+    r.weather=v?(m+": "+v):"Seasonal — check local forecast";
+  });
+  if(Array.isArray(ai.coach)&&ai.coach.length)
+    document.getElementById("coach").innerHTML=
+      ai.coach.map(function(t){return '<li><span class="pin">▸</span><span>'+esc(t)+'</span></li>';}).join("");
+  if(Array.isArray(ai.meals)&&ai.meals.length)
+    document.getElementById("meals").innerHTML=
+      ai.meals.map(function(m){return '<div class="card"><h4>'+esc(m.title||"")+'</h4><p>'+esc(m.body||"")+'</p></div>';}).join("");
+  if(Array.isArray(ai.parks)&&ai.parks.length)
+    document.getElementById("parks").innerHTML=
+      ai.parks.map(function(p){return '<li><span class="pin">▸</span><span><b>'+esc(p.name||"")+'</b> — '+esc(p.note||"")+'</span></li>';}).join("");
+}
+
+/* ---------- text export ---------- */
 function buildText(I,plan){
   var L=[];
-  L.push("RUNNING TRAINING PLAN\n=====================");
-  L.push("Goal: "+I.dist+" km   Target: "+I.finishHours+"h "+I.finishMinutes+"m");
+  L.push("RUNNING TRAINING PLAN — "+(lastIsAI?"AI-assisted":"rule-based")+"\n=====================");
+  L.push("Goal: "+I.dist+" km   Date: "+plan.race.toDateString());
+  L.push("Pace: "+I.pace+" /km   Days/wk: "+I.dpw+"   Plan: "+plan.weeks+" weeks");
   L.push("Location: "+I.place);
+  if(I.age) L.push("Age "+I.age+(I.gender?" / "+I.gender:"")+(I.ht?" / "+I.ht+"cm":"")+(I.wt?" / "+I.wt+"kg":""));
   L.push("");
+  if(plan.flags&&plan.flags.length){
+    L.push("FEASIBILITY CHECK");
+    plan.flags.forEach(function(f){
+      var p=f.level==="high"?"[HIGH RISK] ":f.level==="caution"?"[CAUTION] ":f.level==="info"?"[NOTE] ":"[OK] ";
+      L.push("- "+p+f.msg);
+    });
+    L.push("");
+  }
   plan.rows.forEach(function(r){
-    L.push("WEEK "+r.w+" ["+r.phase+"]   Total "+r.total+" km  Outlook: "+r.weather);
+    L.push("WEEK "+r.w+" ["+r.phase+"]  "+fmtDate(r.from)+" - "+fmtDate(r.to)+"   Total "+r.total+" km");
+    L.push("  Weather: "+r.weather);
+    for(var i=0;i<7;i++){var c=r.cells[i];
+      L.push("  "+WD[i]+": "+(c?c.name+" — "+c.km+" km @ "+c.pace+"/km":"Rest"));}
+    L.push("");
   });
+  L.push("COACH NOTES");
+  document.querySelectorAll("#coach li span:last-child").forEach(function(n){L.push("- "+n.textContent);});
+  L.push("\nMEALS & FUEL");
+  document.querySelectorAll("#meals .card").forEach(function(c){
+    L.push("- "+c.querySelector("h4").textContent+": "+c.querySelector("p").textContent);});
+  L.push("\nRUNNING ROUTES NEAR "+I.place.toUpperCase());
+  document.querySelectorAll("#parks li span:last-child").forEach(function(n){L.push("- "+n.textContent);});
+  L.push("\nWAIVER: "+document.getElementById("waiverTxt").textContent);
   return L.join("\n");
 }
 
@@ -728,17 +1091,17 @@ function buildText(I,plan){
 function readInputs(){
   var avail=[];
   daysBox.querySelectorAll("input:checked").forEach(function(c){avail.push(+c.value);});
-  
-  var h = parseInt(document.getElementById("finishHours").value,10)||0;
-  var m = parseInt(document.getElementById("finishMinutes").value,10)||0;
-  var totalSeconds = (h * 3600) + (m * 60);
-
   return {
     raceDate:document.getElementById("raceDate").value,
     dist:parseFloat(document.getElementById("dist").value),
-    finishHours:h,
-    finishMinutes:m,
-    finishSec:totalSeconds,
+    finishTime:document.getElementById("finishTime").value.trim(),
+    finishSec:parseFinishTime(document.getElementById("finishTime").value),
+    parseFinishTime: function(str){
+      var m=/^(\d{1,2}):([0-5]\d):([0-5]\d)$/.exec(str.trim());
+      if(!m) return null;
+
+      return (+m[1])*3600 + (+m[2])*60 + (+m[3]);
+    },
     dpw:parseInt(document.getElementById("dpw").value,10),
     avail:avail,
     base:parseFloat(document.getElementById("base").value)||0,
@@ -751,48 +1114,112 @@ function readInputs(){
   };
 }
 
-document.getElementById("f").addEventListener("submit", function(e){
+document.getElementById("f").addEventListener("submit",async function(e){
   e.preventDefault();
   var err=document.getElementById("err");err.style.display="none";
-  
   var I=readInputs();
-  if(!I.raceDate) { err.textContent="Please choose a valid target running date."; err.style.display="block"; return; }
-  if(!I.place) { err.textContent="Please provide an execution location."; err.style.display="block"; return; }
-  if(I.avail.length < I.dpw) {
-     err.textContent="Selected availability days must meet or exceed chosen running frequency days per week.";
-     err.style.display="block";
-     return;
-  }
-  if(I.avail.length > I.dpw) I.avail = I.avail.slice(0, I.dpw);
+  if(I.finishSec===null)
+  return fail("Completion time must look like HH:MM:SS");
 
   I.paceSec = I.finishSec / I.dist;
   I.pace = fmtPace(I.paceSec);
+  function fail(m){err.textContent=m;err.style.display="block";err.scrollIntoView({behavior:"smooth"});}
+
+  if(!I.raceDate) return fail("Please choose a race / run date.");
+  if(I.paceSec===null) return fail("Target pace must look like mm:ss, e.g. 06:30.");
+  if(!I.place) return fail("Please enter the place of running.");
+  if(I.avail.length<I.dpw)
+    return fail("You chose "+I.dpw+" days/week but ticked only "+I.avail.length+" weekday"+(I.avail.length===1?"":"s")+". Tick at least "+I.dpw+".");
+  if(I.avail.length>I.dpw) I.avail=I.avail.slice(0,I.dpw);
 
   var plan=buildPlan(I);
-  if(plan.error) { err.textContent=plan.error; err.style.display="block"; return; }
+  if(plan.error) return fail(plan.error);
 
   var bar=document.getElementById("aibar");
-  bar.className="aibar ok";
-  bar.innerHTML='<span>✓</span><span>Local metrics built seamlessly. Plan table generated below.</span>';
-  document.getElementById("aiTag").textContent="· Local Dynamic Engine";
+  var goBtn=document.getElementById("goBtn");
+  var ep=endpoint();
+
+  /* SERVER-ENFORCED mode: ask the server first. It is the hard gate —
+     over-limit returns 429 and NO plan is shown. */
+  if(ep){
+    goBtn.disabled=true;
+    document.getElementById("out").style.display="none";
+    bar.className="aibar";bar.style.display="flex";
+    bar.innerHTML='<span class="spin"></span><span>Checking your daily allowance &amp; researching '+esc(I.place)+'…</span>';
+    var ai;
+    try{
+      ai=await aiEnrich(I,plan);                 /* throws .quota on 429 */
+    }catch(ex){
+      goBtn.disabled=false;
+      if(ex && ex.quota){
+        updateQuota();
+        bar.style.display="none";
+        return fail("Daily limit reached — "+DAILY_LIMIT+" plans per person, per day"+
+          (srvRemaining!=null?"":"")+". This resets at 00:00 UTC. (Enforced by the server — clearing your browser won’t reset it.)");
+      }
+      /* not a quota problem → still give the full rule-based plan */
+      renderBase(I,plan);renderCoachFallback(I);
+      lastIsAI=false;lastPlanText=buildText(I,plan);
+      updateQuota();
+      bar.className="aibar fail";
+      bar.innerHTML='<span>⚠</span><span>AI Coach unavailable ('+esc(ex.message||"error")+'). Showing the full rule-based plan with general guidance.</span>';
+      document.getElementById("aiTag").textContent="· rule-based";
+      return;
+    }
+    /* success: render plan + AI, reflect server-reported remaining */
+    renderBase(I,plan);renderCoachFallback(I);
+    applyAI(plan,ai);
+    lastIsAI=true;lastPlanText=buildText(I,plan);
+    updateQuota();
+    goBtn.disabled=false;
+    bar.className="aibar ok";
+    bar.innerHTML='<span>⌁</span><span>AI Coach applied — weather, routes and notes personalised for '+esc(I.place)+
+      (srvRemaining!=null?'. '+srvRemaining+' of '+DAILY_LIMIT+' plans left today.':'.')+'</span>';
+    document.getElementById("aiTag").textContent="· AI-enhanced";
+    return;
+  }
+
+  /* NO SERVER (local preview): soft local limit so the cap still works */
+  if(softLeft()<=0)
+    return fail("Daily limit reached — "+DAILY_LIMIT+" plans per day (local preview limit; the deployed server enforces this for real).");
 
   renderBase(I,plan);
   renderCoachFallback(I);
-  
-  qSet(qGet()+1); 
-  updateQuota();
+  lastIsAI=false;
+  lastPlanText=buildText(I,plan);
+  qSet(qGet()+1); updateQuota();
+
+  bar.className="aibar";bar.style.display="flex";
+  bar.innerHTML='<span class="spin"></span><span>AI Coach is researching '+esc(I.place)+' — weather &amp; real routes…</span>';
+  goBtn.disabled=true;
+  try{
+    var ai2=await aiEnrich(I,plan);
+    applyAI(plan,ai2);
+    lastIsAI=true;
+    lastPlanText=buildText(I,plan);
+    bar.className="aibar ok";
+    bar.innerHTML='<span>⌁</span><span>AI Coach applied — weather, routes and notes personalised for '+esc(I.place)+'.</span>';
+    document.getElementById("aiTag").textContent="· AI-enhanced";
+  }catch(ex){
+    bar.className="aibar fail";
+    bar.innerHTML='<span>⚠</span><span>AI Coach unavailable ('+esc(ex.message||"error")+'). Showing the full rule-based plan with general guidance.</span>';
+    document.getElementById("aiTag").textContent="· rule-based";
+  }finally{
+    goBtn.disabled=false;
+  }
 });
 
 document.getElementById("demo").addEventListener("click",function(){
   var d=new Date();d.setDate(d.getDate()+7*14);
   document.getElementById("raceDate").value=d.toISOString().slice(0,10);
-  document.getElementById("dist").value="10";
-  document.getElementById("finishHours").value="0";
-  document.getElementById("finishMinutes").value="55";
+  document.getElementById("dist").value="21.1";
+  document.getElementById("pace").value="06:15";
   document.getElementById("dpw").value="4";
-  document.getElementById("base").value="15";
-  document.getElementById("age").value="32";
-  document.getElementById("gender").value="Male";
+  document.getElementById("base").value="18";
+  document.getElementById("age").value="34";
+  document.getElementById("gender").value="Female";
+  document.getElementById("ht").value="165";
+  document.getElementById("wt").value="58";
   document.getElementById("place").value="Lisbon, Portugal";
   document.getElementById("meds").value="None";
   setDays(DEF);
@@ -800,7 +1227,7 @@ document.getElementById("demo").addEventListener("click",function(){
 
 /* ─── PATTAYA MARATHON COUNTDOWN + AUTOFILL ──────────────────── */
 (function pattayaInit(){
-  var PATTAYA_DATE = "2026-07-19";
+  var PATTAYA_DATE = "2026-07-19"; // race day
   function updateCountdown(){
     var el = document.getElementById("pbCountdown");
     if(!el) return;
@@ -811,27 +1238,34 @@ document.getElementById("demo").addEventListener("click",function(){
     if(days > 1)         el.textContent = days + " days until race day";
     else if(days === 1)  el.textContent = "Race day is tomorrow!";
     else if(days === 0)  el.textContent = "Race day is TODAY 🏁";
-    else                 el.textContent = "Race day has completed";
+    else                 el.textContent = "Race day has passed (next race July 2027)";
   }
   updateCountdown();
+  setInterval(updateCountdown, 60*60*1000); // refresh hourly
 
+  // "Auto-fill for Pattaya Marathon" button
   var btn = document.getElementById("fillPattaya");
   if(btn){
     btn.addEventListener("click", function(){
       document.getElementById("raceDate").value = PATTAYA_DATE;
-      document.getElementById("dist").value     = "42.2";
-      document.getElementById("finishHours").value = "4";
-      document.getElementById("finishMinutes").value = "30";
+      document.getElementById("dist").value     = "42.2";   // full marathon default
+      document.getElementById("pace").value     = "06:30";  // conservative for heat
       document.getElementById("dpw").value      = "4";
       document.getElementById("place").value    = "Pattaya, Thailand";
-      document.getElementById("meds").value     = "None — note: training in tropical heat, early morning schedules recommended";
+      document.getElementById("meds").value     = "None — note: training in tropical heat (80%+ humidity), early morning runs recommended";
       setDays(DEF);
+      // Scroll the form into view and flash highlight
       var form = document.getElementById("f");
       form.scrollIntoView({behavior:"smooth", block:"start"});
+      form.style.outline="2px solid var(--volt)";
+      setTimeout(function(){form.style.outline="none";}, 1500);
+      // Update banner button text temporarily for feedback
+      var orig = btn.textContent;
+      btn.textContent = "✓ Filled — Adjust as needed";
+      setTimeout(function(){btn.textContent = orig;}, 2500);
     });
   }
 })();
-
 document.getElementById("reset").addEventListener("click",function(){
   document.getElementById("f").reset();
   document.getElementById("out").style.display="none";
@@ -839,23 +1273,31 @@ document.getElementById("reset").addEventListener("click",function(){
   setDays(DEF);
 });
 
+function flash(m){var e=document.getElementById("copyMsg");e.textContent=m;
+  setTimeout(function(){e.innerHTML="&nbsp;";},3800);}
+
 document.getElementById("copyBtn").addEventListener("click",function(){
-  var I=readInputs(); I.paceSec=I.finishSec/I.dist; I.pace=fmtPace(I.paceSec);
-  var text = buildText(I, buildPlan(I));
-  navigator.clipboard.writeText(text).then(function(){
-    document.getElementById("copyMsg").textContent = "Plan copied successfully.";
-  });
+  navigator.clipboard.writeText(lastPlanText).then(
+    function(){flash("Plan copied — paste it anywhere.");},
+    function(){flash("Couldn’t auto-copy. Use Download .txt instead.");});
+});
+document.getElementById("mailBtn").addEventListener("click",function(){
+  var body=lastPlanText;
+  if(body.length>1600) body=body.slice(0,1500)+"\n\n[…truncated for email. Use Copy Plan or Download .txt for the full table…]";
+  window.location.href="mailto:?subject="+encodeURIComponent("Your Running Training Plan")+"&body="+encodeURIComponent(body);
+  flash("Opening your mail app — long plans may be truncated; Copy / Download has the full version.");
 });
 document.getElementById("printBtn").addEventListener("click",function(){window.print();});
 document.getElementById("txtBtn").addEventListener("click",function(){
-  var I=readInputs(); I.paceSec=I.finishSec/I.dist; I.pace=fmtPace(I.paceSec);
-  var text = buildText(I, buildPlan(I));
-  var b=new Blob([text],{type:"text/plain"}),a=document.createElement("a");
+  var b=new Blob([lastPlanText],{type:"text/plain"}),a=document.createElement("a");
   a.href=URL.createObjectURL(b);a.download="training-plan.txt";
-  document.body.appendChild(a);a.click();a.remove();
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},100);
+  flash("Downloaded training-plan.txt");
 });
 
 updateQuota();
+
 </script>
 </body>
 </html>
