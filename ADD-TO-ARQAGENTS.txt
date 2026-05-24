@@ -1,0 +1,28 @@
+// ════════════════════════════════════════════════════════════════════════
+//  ADD-TO-ARQAGENTS.txt
+//
+//  Open your ARQAgents repo's `index.html`.
+//  Search for: const FREE_APPS = [
+//  Add this object as a new entry right after the GradeDesk entry.
+// ════════════════════════════════════════════════════════════════════════
+
+  {
+    tag:        'Fitness · AI',
+    name:       'Split',
+    desc:       'AI-powered running training plan generator. Tuned for tropical-heat races like Pattaya Marathon 2026. Get a personalized week-by-week plan with paces, weather and local routes. Free, no signup.',
+    icon:       '🏃',
+    glowColor:  'rgba(200,255,30,.12)',
+    features:   ['AI Coach', 'Web Search', 'Weather-aware', '3/day free'],
+    url:        'https://split.arqagents.com/',
+    status:     'live',
+  },
+
+// ════════════════════════════════════════════════════════════════════════
+//  Then commit and push:
+//    git add .
+//    git commit -m "Add Split card to Free Apps"
+//    git push
+//
+//  Cloudflare Pages auto-redeploys ARQAgents in ~30 seconds.
+//  Verify at: https://arqagents.com/#free-apps
+// ════════════════════════════════════════════════════════════════════════

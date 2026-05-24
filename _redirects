@@ -1,0 +1,5 @@
+# Route /api/coach on split.arqagents.com to the Cloudflare Worker
+/api/coach  https://split-coach.arqagents.workers.dev/api/coach  200
+
+# Or, if you set up api.arqagents.com:
+# /api/coach  https://api.arqagents.com/coach  200

@@ -1,0 +1,27 @@
+# ════════════════════════════════════════════════════════════════
+#  Cloudflare Worker config — Split AI Coach
+# ════════════════════════════════════════════════════════════════
+#  This Worker proxies Anthropic API + enforces daily quota via KV.
+#  Domain bindings are configured during deployment (see DEPLOY_GUIDE).
+# ════════════════════════════════════════════════════════════════
+
+name = "split-coach"
+main = "worker.js"
+compatibility_date = "2025-05-01"
+
+# ─── KV namespace for quota tracking ───────────────────────────
+# Create with: wrangler kv:namespace create "QUOTA_KV"
+# Then paste the returned id below.
+[[kv_namespaces]]
+binding = "QUOTA_KV"
+id = "f33aab96a65b4bc183ba88d98d062291"
+
+# ─── Routes (custom subdomain) ─────────────────────────────────
+# Uncomment and adjust AFTER you set up split.arqagents.com.
+# [[routes]]
+# pattern = "api.arqagents.com/*"
+# zone_name = "arqagents.com"
+# custom_domain = true
+
+# Secrets (NOT stored here — set via CLI):
+#   wrangler secret put ANTHROPIC_API_KEY
