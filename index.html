@@ -97,52 +97,154 @@
   .runmark{position:absolute;right:0;top:4px;width:96px;height:96px}
   @media(max-width:640px){.runmark{width:64px;height:64px}}
 
-  /* ---- running-man dance ---- */
-  #lg-runner,#lg-body,#lg-legF,#lg-legB,#lg-armF,#lg-armB{transform-box:view-box}
-  #lg-runner{transform-origin:46px 54px;animation:lg-hop .52s steps(60) infinite}
-  #lg-body  {transform-origin:50px 30px;animation:lg-lean .52s ease-in-out infinite}
-  #lg-legF  {transform-origin:46px 54px;animation:lg-legf .52s cubic-bezier(.7,0,.3,1) infinite}
-  #lg-legB  {transform-origin:46px 54px;animation:lg-legb .52s cubic-bezier(.7,0,.3,1) infinite}
-  #lg-armF  {transform-origin:52px 31px;animation:lg-armf .52s cubic-bezier(.7,0,.3,1) infinite}
-  #lg-armB  {transform-origin:52px 31px;animation:lg-armb .52s cubic-bezier(.7,0,.3,1) infinite}
-  .lg-shadow{transform-box:view-box;transform-origin:46px 90px;animation:lg-sh .52s ease-in-out infinite}
-  .lg-speed{animation:lg-sp .52s linear infinite}
+/* ───────── realistic runner animation ───────── */
 
-  @keyframes lg-hop{
-    0%{transform:translateY(2px)}   25%{transform:translateY(4px)}
-    50%{transform:translateY(-3px)} 75%{transform:translateY(4px)}
-    100%{transform:translateY(2px)}
+#lg-runner,
+#lg-body,
+#lg-legF,
+#lg-legB,
+#lg-armF,
+#lg-armB{
+  transform-box: fill-box;
+  transform-origin:center;
+}
+
+#lg-runner{
+  animation: runnerFloat .72s ease-in-out infinite;
+}
+
+#lg-body{
+  transform-origin:46px 42px;
+  animation: bodyLean .72s ease-in-out infinite;
+}
+
+#lg-legF{
+  transform-origin:46px 54px;
+  animation: legFront .72s cubic-bezier(.55,.05,.45,.95) infinite;
+}
+
+#lg-legB{
+  transform-origin:46px 54px;
+  animation: legBack .72s cubic-bezier(.55,.05,.45,.95) infinite;
+}
+
+#lg-armF{
+  transform-origin:52px 31px;
+  animation: armFront .72s ease-in-out infinite;
+}
+
+#lg-armB{
+  transform-origin:52px 31px;
+  animation: armBack .72s ease-in-out infinite;
+}
+
+.lg-shadow{
+  animation: shadowPulse .72s ease-in-out infinite;
+}
+
+.lg-speed{
+  animation: speedLines .5s linear infinite;
+}
+
+/* BODY */
+
+@keyframes runnerFloat{
+  0%   { transform:translateY(0px); }
+  50%  { transform:translateY(-2px); }
+  100% { transform:translateY(0px); }
+}
+
+@keyframes bodyLean{
+  0%   { transform:rotate(8deg); }
+  50%  { transform:rotate(12deg); }
+  100% { transform:rotate(8deg); }
+}
+
+/* LEGS */
+
+@keyframes legFront{
+  0%{
+    transform:rotate(38deg);
   }
-  @keyframes lg-lean{
-    0%,100%{transform:rotate(6deg)} 50%{transform:rotate(10deg)}
+  50%{
+    transform:rotate(-42deg);
   }
-  @keyframes lg-legf{      /* front leg: knee drives up, then slides back */
-    0%{transform:rotate(-34deg)} 46%{transform:rotate(-34deg)}
-    54%{transform:rotate(30deg)} 96%{transform:rotate(30deg)}
-    100%{transform:rotate(-34deg)}
+  100%{
+    transform:rotate(38deg);
   }
-  @keyframes lg-legb{      /* back leg: opposite phase */
-    0%{transform:rotate(30deg)}  46%{transform:rotate(30deg)}
-    54%{transform:rotate(-34deg)}96%{transform:rotate(-34deg)}
-    100%{transform:rotate(30deg)}
+}
+
+@keyframes legBack{
+  0%{
+    transform:rotate(-42deg);
   }
-  @keyframes lg-armf{
-    0%{transform:rotate(28deg)}  46%{transform:rotate(28deg)}
-    54%{transform:rotate(-30deg)}96%{transform:rotate(-30deg)}
-    100%{transform:rotate(28deg)}
+  50%{
+    transform:rotate(38deg);
   }
-  @keyframes lg-armb{
-    0%{transform:rotate(-30deg)} 46%{transform:rotate(-30deg)}
-    54%{transform:rotate(28deg)} 96%{transform:rotate(28deg)}
-    100%{transform:rotate(-30deg)}
+  100%{
+    transform:rotate(-42deg);
   }
-  @keyframes lg-sh{
-    0%,100%{transform:scaleX(1);opacity:.18} 50%{transform:scaleX(.7);opacity:.32}
+}
+
+/* ARMS */
+
+@keyframes armFront{
+  0%{
+    transform:rotate(-48deg);
   }
-  @keyframes lg-sp{
-    0%{opacity:.15;transform:translateX(3px)} 50%{opacity:.55;transform:translateX(0)}
-    100%{opacity:.15;transform:translateX(3px)}
+  50%{
+    transform:rotate(42deg);
   }
+  100%{
+    transform:rotate(-48deg);
+  }
+}
+
+@keyframes armBack{
+  0%{
+    transform:rotate(42deg);
+  }
+  50%{
+    transform:rotate(-48deg);
+  }
+  100%{
+    transform:rotate(42deg);
+  }
+}
+
+/* SHADOW */
+
+@keyframes shadowPulse{
+  0%{
+    transform:scaleX(1);
+    opacity:.18;
+  }
+  50%{
+    transform:scaleX(.72);
+    opacity:.34;
+  }
+  100%{
+    transform:scaleX(1);
+    opacity:.18;
+  }
+}
+
+/* SPEED */
+
+@keyframes speedLines{
+  0%{
+    opacity:.15;
+    transform:translateX(0);
+  }
+  50%{
+    opacity:.55;
+    transform:translateX(-4px);
+  }
+  100%{
+    opacity:.15;
+    transform:translateX(0);
+  }
+}
   @media(prefers-reduced-motion:reduce){
     #lg-runner,#lg-body,#lg-legF,#lg-legB,#lg-armF,#lg-armB,.lg-shadow,.lg-speed{animation:none}
     #lg-legF{transform:rotate(-34deg)}#lg-legB{transform:rotate(30deg)}
@@ -386,9 +488,21 @@
         </select>
       </div>
       <div class="field c4">
-        <label>Target Pace *  (mm:ss / km)
-          <span class="why">Pace = the time to run one kilometre. Lower&nbsp;=&nbsp;faster (06:30 → 6 min 30 s per km). Every session is paced from this.</span></label>
-        <input type="text" id="pace" placeholder="06:30" pattern="[0-9]{1,2}:[0-5][0-9]" required>
+        <label>Target Completion Time *
+        <span class="why">
+          Example:
+          10K → 01:00:00
+          · Half Marathon → 02:15:00
+          · Marathon → 05:00:00
+          </span>
+          </label>
+
+        <input
+          type="text"
+          id="finishTime"
+          placeholder="02:15:00"
+          pattern="[0-9]{1,2}:[0-5][0-9]:[0-5][0-9]"
+          required>
       </div>
 
       <div class="field c4">
@@ -815,7 +929,7 @@ function renderBase(I,plan){
     cell("Goal",I.dist+" km")+
     cell("Race Date",plan.race.toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"}))+
     cell("Plan Length",plan.weeks+" weeks")+
-    cell("Target Pace",I.pace+" /km")+
+    cell("Target Finish",I.finishTime)+
     cell("Days / Week",I.dpw)+
     cell("Peak Long Run",plan.peakLong+" km")+
     cell("Phases","B"+plan.phases.base+" · Bu"+plan.phases.build+" · P"+plan.phases.peak+" · T"+plan.phases.taper)+
@@ -946,8 +1060,14 @@ function readInputs(){
   return {
     raceDate:document.getElementById("raceDate").value,
     dist:parseFloat(document.getElementById("dist").value),
-    pace:document.getElementById("pace").value.trim(),
-    paceSec:parsePace(document.getElementById("pace").value),
+    finishTime:document.getElementById("finishTime").value.trim(),
+    finishSec:parseFinishTime(document.getElementById("finishTime").value),
+    parseFinishTime: function(str){
+      var m=/^(\d{1,2}):([0-5]\d):([0-5]\d)$/.exec(str.trim());
+      if(!m) return null;
+
+      return (+m[1])*3600 + (+m[2])*60 + (+m[3]);
+    },
     dpw:parseInt(document.getElementById("dpw").value,10),
     avail:avail,
     base:parseFloat(document.getElementById("base").value)||0,
@@ -964,6 +1084,11 @@ document.getElementById("f").addEventListener("submit",async function(e){
   e.preventDefault();
   var err=document.getElementById("err");err.style.display="none";
   var I=readInputs();
+  if(I.finishSec===null)
+  return fail("Completion time must look like HH:MM:SS");
+
+  I.paceSec = I.finishSec / I.dist;
+  I.pace = fmtPace(I.paceSec);
   function fail(m){err.textContent=m;err.style.display="block";err.scrollIntoView({behavior:"smooth"});}
 
   if(!I.raceDate) return fail("Please choose a race / run date.");
