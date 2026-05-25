@@ -205,25 +205,6 @@
   .rest{color:#5e6356;font-style:italic}
   .rest small.xt{display:block;color:var(--volt);opacity:.75;font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px;font-style:normal;font-weight:500;}
   tr.taper td{background:rgba(200,255,30,.05)!important}
-  tr td.raceday{
-    background:rgba(200,255,30,.08)!important;
-    text-align:center;vertical-align:middle;
-    border:1.5px solid var(--volt)!important;
-    box-shadow:inset 0 0 24px rgba(200,255,30,.15), 0 0 14px rgba(200,255,30,.18);
-    padding:11px 8px;
-  }
-  td.raceday .rd-flag{font-size:24px;display:block;line-height:1;margin-bottom:5px}
-  td.raceday .rd-text{
-    display:block;
-    font-family:"Teko",sans-serif;font-size:22px;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--volt);font-weight:700;line-height:1;
-    text-shadow:0 0 12px rgba(200,255,30,.55), 0 0 22px rgba(200,255,30,.25);
-  }
-  td.raceday .rd-pace{
-    display:block;margin-top:6px;
-    font-family:"Saira",sans-serif;font-size:11px;font-weight:500;
-    color:var(--volt);opacity:.85;letter-spacing:.04em;
-  }
 
   .cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:760px){.cols2{grid-template-columns:1fr}}
@@ -252,8 +233,6 @@
     .feas h4,.feas h4 .tag,.feas li,.feas li .ic{color:#000!important;background:transparent!important}
     thead th{background:#000!important;color:#fff!important}
     td.km,h2 .small,.card h4,td.wk .ph{color:#000!important}
-    tr td.raceday{background:#000!important;color:#fff!important;border:1px solid #000!important;box-shadow:none!important}
-    td.raceday .rd-text, td.raceday .rd-pace{color:#fff!important;text-shadow:none!important}
     table{min-width:0;font-size:9px}
   }
 </style>
@@ -560,69 +539,13 @@ function buildPlan(I){
     }
     var sum=0;cells.forEach(function(c){if(c)sum+=c.km;});
 
-    /* ── Race-week overrides (final week only) ──
-       Replace the formal Long Run with a short shakeout, force the day
-       immediately before race day to Rest, and mark the race day index
-       so the renderer can display "Race Day!" instead of a session/rest. */
-    var raceDayIdx = -1;
-    if(w === weeks-1){
-      for(var rdi=0; rdi<7; rdi++){
-        var dd = addDays(ws, rdi);
-        if(dd.getFullYear()===race.getFullYear() &&
-           dd.getMonth()===race.getMonth() &&
-           dd.getDate()===race.getDate()){
-          raceDayIdx = rdi; break;
-        }
-      }
-      if(raceDayIdx >= 0){
-        /* Shakeout distance by goal: 5K→3, 10K→4, HM→5, Marathon→5 */
-        var shakeoutKm = (I.dist >= 21 ? 5 : I.dist >= 10 ? 4 : 3);
-
-        /* 1. Force day immediately before race day to Rest (fresh legs) */
-        if(raceDayIdx > 0){
-          cells[raceDayIdx - 1] = "";
-        } else if(rows.length > 0){
-          /* Race on Monday: clear previous row's Sunday */
-          var prevRow = rows[rows.length - 1];
-          if(prevRow.cells[6]){
-            prevRow.cells[6] = "";
-            prevRow.total = 0;
-            prevRow.cells.forEach(function(c){ if(c) prevRow.total += c.km; });
-          }
-        }
-
-        /* 2. Convert the LAST remaining training session before race day
-              into a Pre-Race Shakeout. This swallows whatever was there
-              (Long Run, Tempo, Easy) so the runner always gets a clear
-              shakeout slot 2+ days before the race. */
-        for(var sx = raceDayIdx - 1; sx >= 0; sx--){
-          if(cells[sx]){
-            cells[sx] = {name:"Pre-Race Shakeout", km:shakeoutKm, pace:fmtPace(P.easy), code:"S"};
-            break;
-          }
-        }
-
-        /* 3. Clear race day cell — renderer paints "Race Day!" */
-        cells[raceDayIdx] = "";
-
-        /* Recompute week total */
-        sum = 0;
-        cells.forEach(function(c){ if(c) sum += c.km; });
-      }
-    }
-
     /* ── Cross-training suggestions for Rest days ──
        Common runner-coach recommendations: low-impact recovery work.
        Rotation gives variety; last rest day stays as TRUE rest. */
     var XT_ROTATION = ["Yoga","Swim","Strength","Walk","Cycle"];
     var crossTraining = [null,null,null,null,null,null,null];
     var restDayIndexes = [];
-    var preRaceIdx = (raceDayIdx > 0 ? raceDayIdx - 1 : -1);
-    for(var di=0; di<7; di++){
-      /* Skip race day and the forced pre-race rest — both stay clean */
-      if(di === raceDayIdx || di === preRaceIdx) continue;
-      if(!cells[di]) restDayIndexes.push(di);
-    }
+    for(var di=0; di<7; di++){ if(!cells[di]) restDayIndexes.push(di); }
     /* Assign cross-training to all rest days EXCEPT the last one (full rest).
        Rotation is offset by week so the same day doesn't always get the same activity. */
     for(var ri=0; ri<restDayIndexes.length-1; ri++){
@@ -637,7 +560,7 @@ function buildPlan(I){
       }
     }
 
-    rows.push({w:w+1,phase:phase,from:ws,to:we,cells:cells,monIdx:ws.getMonth(),total:sum,crossTraining:crossTraining,raceDayIdx:raceDayIdx});
+    rows.push({w:w+1,phase:phase,from:ws,to:we,cells:cells,monIdx:ws.getMonth(),total:sum,crossTraining:crossTraining});
   }
 
   var flags=feasibility(I,{rows:rows,weeks:weeks,peakLong:peakLong});
@@ -743,10 +666,6 @@ function renderBase(I,plan){
     body+='<td class="wk">'+r.w+'<span class="ph">'+r.phase+'</span></td>';
     body+='<td class="dt">'+fmtDate(r.from)+'<br>→ '+fmtDate(r.to)+'</td>';
     for(var i=0;i<7;i++){
-      if(i === r.raceDayIdx){
-        body+='<td class="raceday"><span class="rd-flag">🏁</span><span class="rd-text">Race Day!</span><span class="rd-pace">'+I.dist+'km @ '+I.pace+'/km</span></td>';
-        continue;
-      }
       var c=r.cells[i];
       if(c){
         body+='<td><span class="sess">'+c.km+' km @ '+c.pace+'/km<small>'+esc(c.name)+'</small></span></td>';
@@ -827,10 +746,6 @@ function buildText(I,plan){
     L.push("WEEK"+r.w);
     for(var i=0; i<7; i++){
       var dayDate = fmtDayDate(addDays(r.from, i));
-      if(i === r.raceDayIdx){
-        L.push(dayDate+": 🏁 RACE DAY! ("+I.dist+"km @ "+I.pace+"/km)");
-        continue;
-      }
       var c = r.cells[i];
       if(c){
         L.push(dayDate+": "+c.km+"km@"+c.pace+"/km");
